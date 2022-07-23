@@ -1,0 +1,259 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<title>Welcome to AutoGrade Home Page</title>
+
+<link rel="stylesheet"
+	th:href="@{webjars/bootstrap/4.2.1/css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{/css/main.css}" />
+<link rel="stylesheet" th:href="@{/css/student_assignment.css}" />
+
+</head>
+
+<body>
+
+	<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+		<a class="navbar-brand" href="#">AutoGrader</a>
+	</nav>
+
+	<main role="main" class="container">
+
+		<div class="starter-template assignmentSub">
+			<!--<h1>Welcome to AutoGrader Home Page</h1>
+        <h2>
+            <span th:text="'Hello, ' + ${message}"></span>
+        </h2>
+    </div>
+
+    <ol>
+        <li th:each="task : ${tasks}" th:text="${task}"></li>
+    </ol>-->
+
+
+			<div class="container-fluid assignmentSub">
+
+				<h2 class="col-xs-12 assignemtSub--heading pb-4">Student
+					Assignment Submission</h2>
+
+
+				<form id="uploadAssignment" action="" enctype="multipart/form-data"
+					method="post" th:action="@{/upload}">
+
+					<div class="form-group row">
+						<label for="courseName" class="col-sm-2 col-form-label">Course
+							Name</label>
+						<div class="col-sm-10 form-group-content">
+							<input type="hidden" name="courseName" class="getValue" value=""
+								aria-hidden="true" /> <select id="courseName"
+								class="custom-valid-input" name="course name"
+								aria-label="Course Name : select B.Tech, MCA, BCA">
+								<option value="">Select</option>
+								<option value="B.Tech">B.Tech</option>
+								<option value="MCA">MCA</option>
+								<option value="BCA">BCA</option>
+							</select>
+							<p
+								class="error-msg-text-firstname value-missing-text error-msg-text"
+								hidden="true">Course Name is required</p>
+
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<label for="moduleName" class="col-sm-2 col-form-label">Module</label>
+						<div class="col-sm-10 form-group-content ">
+							<input type="hidden" name="moduleName" class="getValue" value=""
+								aria-hidden="true" /> <select id="moduleName"
+								class="custom-valid-input" name="module"
+								aria-label="module : select B.Tech, MCA, BCA">
+								<option value="">Select</option>
+								<option value="OS">OS</option>
+								<option value="IOT">IOT</option>
+								<option value="LA">LA</option>
+							</select>
+
+
+							<p
+								class="error-msg-text-firstname value-missing-text error-msg-text"
+								hidden="true">Module is required</p>
+
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<label for="assignment" class="col-sm-2 col-form-label">Assignment</label>
+						<div class="col-sm-10">
+
+							<select id="assignment" class="required-val  custom-valid-input"
+								name="assignment" aria-label="assignment : select 1, 2, 3">
+								<option value="">Select</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+							</select>
+							<p
+								class="error-msg-text-firstname value-missing-text error-msg-text"
+								hidden="true">This field is required</p>
+
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<label for="assignment" class="col-sm-2 col-form-label">Upload
+							File</label>
+
+						<div class="col-sm-10">
+
+							<input id="files4" name="file"
+								class="browseFile custom-valid-input" type="file"> <span
+								class="pl-5 lastDate" hidden> Last submission date and
+								time 12/11/2011</span></br> <a href="" class="pt-2 reviewLink " hidden>
+								click here to review</a>
+							<div class="error-msg-text" hidden>Please upload file.</div>
+							<div class="uploadError" hidden>Unable to upload item. Only
+								documents up to 50MB in size and in the following format:JAVA is
+								allowed</div>
+
+							<div class="form-group row mt-5 ml-1">
+								<button class="btn save mr-4 btn-primary " id="save"
+									type="button">Submit</button>
+								<button class="btn btn-cancel mr-4 clear btn-secondary"
+									id="clear" type="button">Clear</button>
+								<button class="btn btn-cancel cancel clear btn-secondary"
+									id="cancel" type="button">Cancel</button>
+
+							</div>
+
+						</div>
+					</div>
+
+				</form>
+			</div>
+		</div>
+
+
+	</main>
+	<!-- /.container -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+	<script type="text/javascript"
+		th:src="@{webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
+	<script>
+
+const chooseFile = '.browseFile';
+const fileType = '.fileType';
+let isValidAssignemnt = true;
+const formDetailsContent='.form-group-content'
+const myDocuments = {
+	uploadFile() {
+		const acceptedFormats = ['java'];
+		const fileextension = $(chooseFile)
+      .val()
+      .split('.')
+      .pop()
+      .toLowerCase();
+     	 const file_data = $(chooseFile).prop('files')[0];
+    	const fileSize = file_data.size / 1024 / 1024;
+    	if (acceptedFormats.indexOf(fileextension) !== -1 && fileSize <= 50) {
+		fileTypeValue = fileextension === 'java' ? '16' : '2';
+
+		$(this).siblings('.uploadError').attr('hidden', true);
+		$('.lastDate').removeAttr('hidden');
+		$('.reviewLink').removeAttr('hidden');
+	
+	} else {
+		$(this).siblings('.uploadError').removeAttr('hidden');
+		$(this)
+          .parent()
+          .find('.error-msg-text')
+          .attr('hidden', true);
+          isValidAssignemnt = false;
+          return isValidAssignemnt;
+          
+    }
+		},
+		
+		submitForm() {
+			if(isValidAssignemnt){
+			alert("Form is submitted");
+			$('#uploadAssignment').submit();
+			}
+			
+		},
+	validateInput() {
+	isValidAssignemnt = true;
+    $('.custom-valid-input').each(function() {
+      if (
+        $(this).val() === null ||
+        $(this)
+          .val()
+          .trim() === ''
+      ) {
+        $(this)
+          .parent()
+          .find('.error-msg-text')
+          .attr('hidden', false);
+        $(this).addClass('error-msg-textbox');
+        isValidAssignemnt = false;
+      }
+      else {
+	$(this)
+          .parent()
+          .find('.error-msg-text')
+          .attr('hidden', true);
+        $(this).removeClass('error-msg-textbox');
+        
+}
+
+ 
+    });
+    myDocuments.submitForm();
+  },
+  
+  
+
+resetFields() {
+	$('.custom-valid-input').each(function() {
+		$(this).find('option:first').attr('selected', 'selected');
+		 });
+		 
+	$('.custom-valid-input').siblings('.uploadError').addClass('hidden');
+	$('.custom-valid-input').siblings('.error-msg-text')
+          .attr('hidden', true);
+           $('.lastDate').addClass('hidden');
+		$('.reviewLink').addClass('hidden');
+		$('.lastDate').addClass('hidden');
+		
+	
+},
+
+getValues() {
+	var getData=$(this).val();
+	const selectedElement = $(this)
+      .parents(formDetailsContent)
+      .find('.getValue').val(getData);
+},
+		
+init() {
+$(document).on('change', chooseFile, this.uploadFile);
+$(document).on('click', '#save', this.validateInput);
+$(document).on('click', '.clear', this.resetFields);
+$(document).on('change', '.custom-valid-input', this.getValues);
+},
+
+};
+myDocuments.init();
+
+</script>
+
+
+	<script src="scripts/studentSubmission.js"></script>
+
+
+</body>
+</html>

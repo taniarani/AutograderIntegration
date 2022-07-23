@@ -1,0 +1,25 @@
+.assignmentSub	.error-msg-text,
+.uploadError {
+		font-size: 14px;
+    line-height: 21px;
+    font-weight: 700;
+    padding-top: 0;
+    color: #cc4024;
+    
+	}
+
+	.assignmentSub {
+		margin-left:15%;
+		margin-top:10%;
+		
+	}
+
+	.assignemtSub--heading {
+		color:red;
+	}
+	
+.reviewLink {
+	text-decoration: underline;
+	color:blue;
+	margin-left:46%;
+}

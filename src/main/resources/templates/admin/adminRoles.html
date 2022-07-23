@@ -1,0 +1,189 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<title>Welcome to AutoGrade Home Page</title>
+
+<link rel="stylesheet"
+	th:href="@{webjars/bootstrap/4.2.1/css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{/css/main.css}" />
+<link rel="stylesheet" th:href="@{/css/student_assignment.css}" />
+
+</head>
+
+<body>
+
+	<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+		<a class="navbar-brand" href="#">AutoGrader</a>
+	</nav>
+
+	<main role="main" class="container">
+
+		<div class="starter-template adminRoles">
+			<!--<h1>Welcome to AutoGrader Home Page</h1>
+        <h2>
+            <span th:text="'Hello, ' + ${message}"></span>
+        </h2>
+  
+
+    <ol>
+        <li th:each="task : ${tasks}" th:text="${task}"></li>
+    </ol>-->
+
+
+			<div class="container-fluid admin-role">
+
+				<form id="roleCreation" action="" enctype="multipart/form-data">
+
+					<h2 class="col-xs-12 assignemtSub--heading pb-4 mt-2">Role
+						Creation</h2>
+					<div class="form-group row">
+						<label for="name" class="col-sm-2 col-form-label">Name</label>
+						<div class="col-sm-10 form-group-content">
+							<input type="hidden" name="name" class="getValue" value=""
+								aria-hidden="true" /> <input type="text" id="firstName"
+								class="custom-valid-input restrictInput" name="firstName"
+								pattern="[a-zA-Z0-9\s'-]+" placeholder="Name" maxlength="35"
+								required="true" aria-label="name">
+							<p class="error-msg-text" hidden="true">Name is required</p>
+
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<label for="name" class="col-sm-2 col-form-label">Description</label>
+						<div class="col-sm-10 form-group-content">
+							<input type="hidden" name="name" class="getValue" value=""
+								aria-hidden="true" /> <input type="text" id="firstName"
+								class="custom-valid-input restrictInput" name="description"
+								pattern="[a-zA-Z0-9\s'-]+" placeholder="description"
+								maxlength="100" required="true" aria-label="description">
+							<p class="error-msg-text" hidden="true">Description is
+								required</p>
+
+						</div>
+					</div>
+					<div class="form-group row mt-5 ml-1">
+						<button class="btn save mr-4 btn-primary " id="save" type="button">
+							Submit</button>
+						<button class="btn btn-cancel mr-4 clear btn-secondary" id="clear"
+							type="button">Clear</button>
+						<button class="btn btn-cancel cancel clear btn-secondary"
+							id="cancel" type="button">Cancel</button>
+
+					</div>
+				</form>
+
+
+			</div>
+		</div>
+
+
+
+	</main>
+	<!-- /.container -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+	<script type="text/javascript"
+		th:src="@{webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
+	<script>
+
+
+let isValidAssignemnt = true;
+const formDetailsContent='.form-group-content';
+const namePattern = /^[a-zA-Z0-9-_ ']+$/;
+
+const adminRoles = {
+	
+		submitForm() {
+			if(isValidAssignemnt){
+			alert("Form is submitted");
+			$('#roleCreation').submit();
+			//$('#save').text('Resubmit');
+			}
+			
+		},
+		
+	validateInput() {
+	isValidAssignemnt = true;
+    $('.custom-valid-input').each(function() {
+      if (
+        $(this).val() === null ||
+        $(this)
+          .val()
+          .trim() === ''
+      ) {
+        $(this)
+          .parent()
+          .find('.error-msg-text')
+          .attr('hidden', false);
+        $(this).addClass('error-msg-textbox');
+        isValidAssignemnt = false;
+      }
+      else {
+	$(this)
+          .parent()
+          .find('.error-msg-text')
+          .attr('hidden', true);
+        $(this).removeClass('error-msg-textbox');
+        
+}
+    });
+    adminRoles.submitForm();
+  },
+  
+  
+
+resetFields() {
+	$('form :input').val('');
+	$('.custom-valid-input').siblings('.error-msg-text')
+          .attr('hidden', true);
+		
+	
+},
+
+restrictInvalidCharacters(e, regex) {
+  var s = String.fromCharCode(e.which);
+  if (regex.test(s)) return true;
+  else return false;
+},
+
+
+getValues() {
+	var getData=$(this).val();
+	const selectedElement = $(this)
+      .parents(formDetailsContent)
+      .find('.getValue').val(getData);
+},
+
+invalidCharacters(e) {
+    var regExp = new RegExp("^[a-zA-Z 0-9'-]+$");
+    return adminRoles.restrictInvalidCharacters(e, regExp);
+  },
+		
+init() {
+$(document).on('click', '#save', this.validateInput);
+$(document).on('click', '.clear', this.resetFields);
+$(document).on('change', '.custom-valid-input', this.getValues);
+$(document).on(
+    'keypress',
+    '.restrictInput',
+    this.invalidCharacters
+  );
+},
+
+};
+adminRoles.init();
+
+</script>
+
+
+	<script src="scripts/studentSubmission.js"></script>
+
+
+</body>
+</html>

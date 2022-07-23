@@ -1,0 +1,17 @@
+{"properties": [
+  {
+    "name": "spring.hibernate.naming.physical-strategy",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.hibernate.naming.physical-strategy'"
+  },
+  {
+    "name": "welcome.message",
+    "type": "java.lang.String",
+    "description": "A description for 'welcome.message'"
+  },
+  {
+    "name": "project.base-dir",
+    "type": "java.lang.String",
+    "description": "A description for 'project.base-dir'"
+  }
+]}

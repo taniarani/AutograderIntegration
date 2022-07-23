@@ -1,0 +1,158 @@
+
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<title>Welcome to AutoGrade Home Page</title>
+
+<link rel="stylesheet"
+	th:href="@{webjars/bootstrap/4.2.1/css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{/css/main.css}" />
+<link rel="stylesheet" th:href="@{/css/student_assignment.css}" />
+
+</head>
+
+<body>
+
+	<div class="container my-2">
+		<div class="card">
+			<div class="card-body">
+				<div th:switch="${courses}" class="container my-5">
+					<div class="col-md-10">
+						<div th:case="*">
+							<table class="table table-striped table-responsive-md">
+								<thead>
+									<tr>
+										<th>Id</th>
+										<th>Name</th>
+										<th>Description</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="course : ${courses}">
+										<td th:text="${course.id}"></td>
+										<td th:text="${course.name}"></td>
+										<td th:text="${course.details}"></td>
+										<td><a th:href="@{/course/update/{id}(id=${course.id})}"
+											class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i>Update</a></td>
+										<td><a th:href="@{/course/delete/{id}(id=${course.id})}"
+											class="btn btn-primary"><i class="fas fa-user-times ml-2"></i>Delete</a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</main>
+	<!-- /.container -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+	<script type="text/javascript"
+		th:src="@{webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
+	<script>
+
+
+let isValidAssignemnt = true;
+const formDetailsContent='.form-group-content';
+const namePattern = /^[a-zA-Z0-9-_ ']+$/;
+
+const adminRoles = {
+	
+		submitForm() {
+			if(isValidAssignemnt){
+			alert("Form is submitted");
+			$('#roleCreation').submit();
+			//$('#save').text('Resubmit');
+			}
+			
+		},
+		
+	validateInput() {
+	isValidAssignemnt = true;
+    $('.custom-valid-input').each(function() {
+      if (
+        $(this).val() === null ||
+        $(this)
+          .val()
+          .trim() === ''
+      ) {
+        $(this)
+          .parent()
+          .find('.error-msg-text')
+          .attr('hidden', false);
+        $(this).addClass('error-msg-textbox');
+        isValidAssignemnt = false;
+      }
+      else {
+	$(this)
+          .parent()
+          .find('.error-msg-text')
+          .attr('hidden', true);
+        $(this).removeClass('error-msg-textbox');
+        
+}
+    });
+    adminRoles.submitForm();
+  },
+  
+  
+
+resetFields() {
+	$('form :input').val('');
+	$('.custom-valid-input').siblings('.error-msg-text')
+          .attr('hidden', true);
+		
+	
+},
+
+restrictInvalidCharacters(e, regex) {
+  var s = String.fromCharCode(e.which);
+  if (regex.test(s)) return true;
+  else return false;
+},
+
+
+getValues() {
+	var getData=$(this).val();
+	const selectedElement = $(this)
+      .parents(formDetailsContent)
+      .find('.getValue').val(getData);
+},
+
+invalidCharacters(e) {
+    var regExp = new RegExp("^[a-zA-Z 0-9'-]+$");
+    return adminRoles.restrictInvalidCharacters(e, regExp);
+  },
+		
+init() {
+$(document).on('click', '#save', this.validateInput);
+$(document).on('click', '.clear', this.resetFields);
+$(document).on('change', '.custom-valid-input', this.getValues);
+$(document).on(
+    'keypress',
+    '.restrictInput',
+    this.invalidCharacters
+  );
+},
+
+};
+adminRoles.init();
+
+</script>
+
+
+	<script src="scripts/studentSubmission.js"></script>
+
+
+</body>
+</html>
+

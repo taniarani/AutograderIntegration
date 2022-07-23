@@ -1,0 +1,229 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<title>Welcome to AutoGrade Home Page</title>
+
+<link rel="stylesheet"
+	th:href="@{webjars/bootstrap/4.2.1/css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{/css/main.css}" />
+<link rel="stylesheet" th:href="@{/css/student_assignment.css}" />
+
+</head>
+<body>
+
+	<main role="main" class="container">
+		<header>
+			<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+				<a class="navbar-brand" href="#">AutoGrader</a>
+			</nav>
+		</header>
+
+		<div class="starter-template">
+			<div class="container-fluid">
+				<form id="editProfessor" action="" enctype="multipart/form-data"
+					method="POST" th:action="@{/professor/{id}(id=${professor.id})}"
+					th:object="${professors}">
+					<div class="createStudent">
+						<h2 class="col-xs-12 assignemtSub--heading pb-4 mt-2 ml-2">Edit
+							Professor</h2>
+
+						<div class="form-group row editProffesor-form">
+							<label for="name" class="col-sm-2 col-form-label">Name</label>
+							<div class="col-sm-10 form-group-content">
+								<!-- 	<input type="hidden" name="name" class="getValue" value=""
+									aria-hidden="true" /> 
+									 -->
+								<input type="text" id="firstName"
+									class="custom-valid-input restrictInput" name="name"
+									pattern="[a-zA-Z0-9\s'-]+" placeholder="Name" maxlength="35"
+									required="true" aria-label="name">
+								<p class="error-msg-text" hidden="true">First Name is
+									required</p>
+
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label for="name" class="col-sm-2 col-form-label">Date of
+								Birth</label>
+							<div class="col-sm-10 form-group-content">
+								<!-- <input type="hidden" name="date" class="getValue" value=""
+									aria-hidden="true" /> 
+									 -->
+									<input type="date" id="dateOfBirth"
+									class="custom-valid-input restrictInput" name="dob"
+									maxlength="35" required="true" aria-label="dob">
+								<p class="error-msg-text" hidden="true">Date of birth is
+									required</p>
+
+							</div>
+
+
+							<div class="form-group row editProffesor-form">
+								<label for="name" class="col-sm-2 col-form-label p-0">Module
+									Coordinator</label>
+								<div class="col-sm-10 form-group-content">
+									<!-- <input type="hidden" name="course" class="getValue" value=""
+										aria-hidden="true" />
+										 -->
+										 <select id="coordinator"
+										class="custom-valid-input p-0" name="coordinator"
+										aria-label="Course Name : select B.Tech, MCA, BCA">
+										<option value="">Select</option>
+										<option value="OS">OS</option>
+										<option value="Computer Networking">Computer
+											Networking</option>
+									</select>
+									<p class="error-msg-text" hidden="true">Module Coordinator
+										is required</p>
+
+								</div>
+							</div>
+
+							<div class="form-group row editProffesor-form">
+								<label for="name" class="col-sm-2 col-form-label p-0">Active
+									Posting Allowed</label>
+								<div class="col-sm-10 form-group-content">
+									<!-- <input type="hidden" name="isPostingAllowed" class="getValue"
+										value="" aria-hidden="true" /> 
+										 -->
+										<select id="moduleCoordinator"
+										class="custom-valid-input" name="isPostingAllowed"
+										aria-label="module coordinator : select Yes, No">
+										<option value="">Select</option>
+										<option value="Yes">Yes</option>
+										<option value="No">No</option>
+									</select>
+									<p class="error-msg-text" hidden="true">This field is
+										required</p>
+
+								</div>
+							</div>
+
+
+							<div class="form-group row mt-5 ml-1">
+								<button class="btn save mr-4 btn-primary " id="save"
+									type="button">Update</button>
+								<button class="btn btn-cancel mr-4 clear btn-secondary"
+									id="clear" type="button">Clear</button>
+								<button class="btn btn-cancel mr-4 clear btn-secondary"
+									id="clear" type="button">Cancel</button>
+							</div>
+
+						</div></div>
+				</form>
+			</div>
+		</div>
+
+	</main>
+	<!-- /.container -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script type="text/javascript"
+		th:src="@{webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
+
+	<script>
+let isValidAssignemnt = true;
+const formDetailsContent='.form-group-content';
+let emailValidation = true;
+
+
+const createStudent = {
+		submitForm() {
+			if(isValidAssignemnt && emailValidation){
+			alert("Form is submitted");
+			$('#editProfessor').submit();
+			//$('#save').text('Resubmit');
+			}
+			
+		},
+		
+	validateInput() {
+	isValidAssignemnt = true;
+    $('.custom-valid-input').each(function() {
+      if (
+        $(this).val() === null ||
+        $(this)
+          .val()
+          .trim() === ''
+      ) {
+        $(this)
+          .parent()
+          .find('.error-msg-text')
+          .attr('hidden', false);
+        $(this).addClass('error-msg-textbox');
+        isValidAssignemnt = false;
+      }
+      else {
+	$(this)
+          .parent()
+          .find('.error-msg-text')
+          .attr('hidden', true);
+        $(this).removeClass('error-msg-textbox');
+        
+}
+
+if(!emailValidation)	{
+	$('#emailId').siblings('.error-msg-text')
+          .attr('hidden', true);
+	$(this)
+          .parent()
+          .find('.invalid-emailError')
+          .attr('hidden', false);
+}
+else {
+	
+	$(this)
+          .siblings('.invalid-emailError')
+          .attr('hidden', true);
+}
+    });
+    
+    createStudent.submitForm();
+  },
+  
+resetFields() {
+	$('form :input').val('');
+	$('.custom-valid-input').siblings('.error-msg-text')
+          .attr('hidden', true);
+     $('.custom-valid-input').siblings('.invalid-emailError')
+          .attr('hidden', true);
+},
+
+getValues() {
+	var getData=$(this).val();
+	const selectedElement = $(this)
+      .parents(formDetailsContent)
+      .find('.getValue').val(getData);
+},
+
+validateEmailId() {
+   emailValidation = true;
+   const email = $('#emailId').val();
+   const emailPattern = /^([a-zA-Z\d.+-]+)@([a-zA-Z\d-]+)\.([a-zA-Z]{2,8})(\.[a-zA-Z]{2,8})?$/;
+   const emailId = email.match(emailPattern);
+  if (emailId === null && email !== '') {
+	emailValidation = false;
+}
+return emailValidation;
+},
+		
+init() {
+$(document).on('click', '#save', this.validateInput);
+$(document).on('click', '.clear', this.resetFields);
+$(document).on('change', '.custom-valid-input', this.getValues);
+$(document).on('input', '#emailId', this.validateEmailId);
+
+},
+
+};
+createStudent.init();
+
+</script>
+	<!-- //<script src="scripts/studentSubmission.js"></script> -->
+</body>
+</html>

@@ -1,0 +1,292 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<title>Welcome to AutoGrade Home Page</title>
+
+<link rel="stylesheet"
+	th:href="@{webjars/bootstrap/4.2.1/css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{/css/main.css}" />
+<link rel="stylesheet" th:href="@{/css/student_assignment.css}" />
+
+</head>
+<body>
+
+	<main role="main" class="container">
+		<header>
+			<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+				<a class="navbar-brand" href="#">AutoGrader</a>
+			</nav>
+		</header>
+
+		<div class="starter-template">
+			<div class="container-fluid">
+				<form id="studentCreation" action="" enctype="multipart/form-data" method="post"
+					th:action="@{/student}" th:object="${studentReqInfo}" >
+					<div class="createStudent">
+						<h2 class="col-xs-12 assignemtSub--heading pb-4 mt-2">Create
+							Student</h2>
+
+						<div class="form-group row">
+							<label for="name" class="col-sm-2 col-form-label">First
+								Name</label>
+							<div class="col-sm-10 form-group-content">
+								<!-- <input type="hidden" name="name" class="getValue" value=""
+									aria-hidden="true" /> 
+								 -->	
+									<input type="text" id="firstName"
+									class="custom-valid-input restrictInput" name="firstName"
+									pattern="[a-zA-Z0-9\s'-]+" placeholder="Name" maxlength="35"
+									required="true" aria-label="name">
+								<p class="error-msg-text" hidden="true">First Name is
+									required</p>
+
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label for="name" class="col-sm-2 col-form-label">Middle
+								Name</label>
+							<div class="col-sm-10 form-group-content">
+								<!-- <input type="hidden" name="name" class="getValue" value=""
+									aria-hidden="true" />
+								 -->	
+									 <input type="text" id="middleName"
+									class="restrictInput" name="middleName"
+									pattern="[a-zA-Z0-9\s'-]+" placeholder="middle name"
+									maxlength="35" aria-label="name">
+
+
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label for="name" class="col-sm-2 col-form-label">Last
+								Name</label>
+							<div class="col-sm-10 form-group-content">
+								<!-- <input type="hidden" name="lastName" class="getValue" value=""
+									aria-hidden="true" />
+								 -->	
+									 <input type="text" id="lastName"
+									class="custom-valid-input restrictInput" name="lastName"
+									pattern="[a-zA-Z0-9\s'-]+" placeholder="lastName"
+									maxlength="35" required="true" aria-label="lastName">
+								<p class="error-msg-text" hidden="true">Last Name is
+									required</p>
+
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label for="name" class="col-sm-2 col-form-label">Date of
+								Birth</label>
+							<div class="col-sm-10 form-group-content">
+								<!-- <input type="hidden" name="name" class="getValue" value=""
+									aria-hidden="true" />
+								 -->	
+									 <input type="date" id="dateOfBirth"
+									class="custom-valid-input restrictInput" name="dateOfBirth"
+									maxlength="35" required="true" aria-label="dateOfBirth">
+								<p class="error-msg-text" hidden="true">Date of birth is
+									required</p>
+
+							</div>
+
+
+						</div>
+
+						<div class="form-group row">
+							<label for="name" class="col-sm-2 col-form-label">Student
+								Number</label>
+							<div class="col-sm-10 form-group-content">
+								<!-- <input type="hidden" name="studentNumber" class="getValue"
+									value="" aria-hidden="true" />
+								 -->	
+									 <input type="text"
+									id="studentNumber" class="custom-valid-input"
+									name="studentNumber" maxlength="5" required="true"
+									aria-label="studentNumber">
+								<p class="error-msg-text" hidden="true">Student Number is
+									required</p>
+
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label for="name" class="col-sm-2 col-form-label">Course</label>
+							<div class="col-sm-10 form-group-content">
+								<!-- <input type="hidden" name="course" class="getValue" value=""
+									aria-hidden="true" />
+									 -->
+									 <select id="courseCoordinator"
+									class="custom-valid-input" name="courseName"
+									aria-label="Course Name : select B.Tech, MCA, BCA">
+									<option value="">Select</option>
+									<option value="OS">OS</option>
+									<option value="Computer Networking">Computer
+										Networking</option>
+								</select>
+								<p class="error-msg-text" hidden="true">Course is required</p>
+
+							</div>
+						</div>
+
+
+						<div class="form-group row">
+							<label for="name" class="col-sm-2 col-form-label">Email
+								ID</label>
+							<div class="col-sm-10 form-group-content">
+								
+									<input maxlength="255" type="email" name="email"
+									aria-label="Email address" value=""
+									class="custom-valid-input email" id="email" autocomplete="on"
+									pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$"
+									placeholder="emailyours@email.com" required="true">
+								<p class="error-msg-text" hidden="true">Email is required</p>
+								<p class="invalid-emailError" hidden="true">Please enter
+									valid email address</p>
+
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label for="description" class="col-sm-2 col-form-label">Password</label>
+							<div class="col-sm-10 form-group-content">
+								
+									<input name="password"
+									id="j_j_password" type="password" value=""
+									class="custom-valid-input password" maxlength="20"
+									tabindex="undefined" autocomplete="off" placeholder="Password"
+									aria-label="password field">
+								<p class="error-msg-text" hidden="true">password is required</p>
+							</div>
+						</div>
+
+
+
+						<div class="form-group row mt-5 ml-1">
+							<button class="btn save mr-4 btn-primary " id="save"
+								type="button">Submit</button>
+							<button class="btn btn-cancel mr-4 clear btn-secondary"
+								id="clear" type="button">Clear</button>
+							<button class="btn btn-cancel mr-4 clear btn-secondary"
+								id="clear" type="button">Cancel</button>
+						</div>
+
+					</div>
+				</form>
+			</div>
+		</div>
+
+
+	</main>
+	<!-- /.container -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script type="text/javascript"
+		th:src="@{webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
+
+	<script>
+let isValidAssignemnt = true;
+const formDetailsContent='.form-group-content';
+let emailValidation = true;
+
+
+const createStudent = {
+		submitForm() {
+			if(isValidAssignemnt && emailValidation){
+			alert("Form is submitted");
+			$('#studentCreation').submit();
+			//$('#save').text('Resubmit');
+			}
+			
+		},
+		
+	validateInput() {
+	isValidAssignemnt = true;
+    $('.custom-valid-input').each(function() {
+      if (
+        $(this).val() === null ||
+        $(this)
+          .val()
+          .trim() === ''
+      ) {
+        $(this)
+          .parent()
+          .find('.error-msg-text')
+          .attr('hidden', false);
+        $(this).addClass('error-msg-textbox');
+        isValidAssignemnt = false;
+      }
+      else {
+	$(this)
+          .parent()
+          .find('.error-msg-text')
+          .attr('hidden', true);
+        $(this).removeClass('error-msg-textbox');
+        
+}
+
+if(!emailValidation)	{
+	$('#emailId').siblings('.error-msg-text')
+          .attr('hidden', true);
+	$(this)
+          .parent()
+          .find('.invalid-emailError')
+          .attr('hidden', false);
+}
+else {
+	
+	$(this)
+          .siblings('.invalid-emailError')
+          .attr('hidden', true);
+}
+    });
+    
+    createStudent.submitForm();
+  },
+  
+resetFields() {
+	$('form :input').val('');
+	$('.custom-valid-input').siblings('.error-msg-text')
+          .attr('hidden', true);
+     $('.custom-valid-input').siblings('.invalid-emailError')
+          .attr('hidden', true);
+},
+
+getValues() {
+	var getData=$(this).val();
+	const selectedElement = $(this)
+      .parents(formDetailsContent)
+      .find('.getValue').val(getData);
+},
+
+validateEmailId() {
+   emailValidation = true;
+   const email = $('#emailId').val();
+   const emailPattern = /^([a-zA-Z\d.+-]+)@([a-zA-Z\d-]+)\.([a-zA-Z]{2,8})(\.[a-zA-Z]{2,8})?$/;
+   const emailId = email.match(emailPattern);
+  if (emailId === null && email !== '') {
+	emailValidation = false;
+}
+return emailValidation;
+},
+		
+init() {
+$(document).on('click', '#save', this.validateInput);
+$(document).on('click', '.clear', this.resetFields);
+$(document).on('change', '.custom-valid-input', this.getValues);
+$(document).on('input', '#emailId', this.validateEmailId);
+
+},
+
+};
+createStudent.init();
+
+</script>
+	<!-- //<script src="scripts/studentSubmission.js"></script> -->
+</body>
+</html>

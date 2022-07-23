@@ -1,0 +1,97 @@
+.form-control {
+	width:50%;
+}
+
+ select {
+    overflow: hidden;
+    }
+    
+    label {
+	font-size: 16px;
+    font-weight: bold;
+    line-height: 21px;
+}
+
+.custom-button {
+    background-color: #0E7D9C;
+    color: #ffffff;
+    border-radius: 6px;
+    font-weight: bold;
+    border: 1px solid #0E7D9C;
+    padding: 6px 32px;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus{
+	box-shadow:none;
+}
+
+.error-msg-text,
+.invalid-emailError
+{
+	font-size: 14px;
+    line-height: 21px;
+    font-weight: 700;
+    padding-top: 0;
+    color: #cc4024;
+    
+	}
+
+input,select  {
+	width:30%;
+	border: 1px solid black;
+    border-radius: 4px;
+    height: 30px;
+    line-height: 15px;
+    overflow: hidden;
+    padding-left:10px;
+}
+
+button {
+	width:120px;
+}
+
+#clear.btn-secondary {
+	background-color: #e6e6e6;
+    color: #262d2d;
+    opacity: 1;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 45%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  color: black;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  opacity:2.5;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}

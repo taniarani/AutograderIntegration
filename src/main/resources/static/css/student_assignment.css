@@ -1,0 +1,110 @@
+.starter-template {
+	margin-top:94px;
+}
+
+.assignmentSub	.error-msg-text,
+.uploadError {
+		font-size: 14px;
+	    line-height: 21px;
+	    font-weight: 700;
+	    padding-top: 0;
+	    color: #cc4024;
+    
+	}
+
+.assignmentSub, .admin-role {
+		margin-left:15%;
+		margin-top:10%;
+	}
+
+.assignemtSub--heading {
+		color:red;
+	}
+	
+.reviewLink {
+	text-decoration: underline;
+	color:blue;
+	margin-left:46%;
+}
+
+.admin-role {
+	border :2px solid black;
+	width  :50%;
+}
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+table .blank_row {
+	height: 20px !important;
+    background-color: #FFFFFF;
+}
+
+.courseUpdate,
+.loginPage,
+.createStudent,.assignmentCreation,
+.reviewStudent {
+	    border: 2px solid black;
+    	padding-left: 35px;
+}
+
+.welcomeAdmin {
+   margin-left: 30px;
+   padding: 20px 30px;
+   border: 2px solid black;
+}
+
+.welcomeAdmin tr {
+	white-space:nowrap;
+}
+
+.welcomeAdmin a {
+	padding:5px;
+}
+
+.container-admin {
+	padding:0;
+	margin:0;
+}
+
+.container-admin .headerElements {
+	transform: translateY(12px);
+    margin: 9%;
+	color:red;
+}
+
+.emptycell {
+	text-align: center;
+}
+
+.emptycell .deleteData {
+	color:#007bff !important;
+}
+
+.reviewCourse .admin-role {
+	width:60%;
+}
+
+.editProffesor-form {
+	padding-left:18px;
+}
+
+.assignmentCreation label {
+	padding-right: 0;
+}
+
+.testCases-tabular {
+	border:1px solid black;
+	padding:20px;
+}
+
+.browseFile {
+    border: none;
+    line-height: 24px;	
+}
+
+.createProfessor .form-group {
+		display:flex;
+	}

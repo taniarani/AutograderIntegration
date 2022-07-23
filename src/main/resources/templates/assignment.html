@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<title>Welcome to AutoGrade Home Page</title>
+
+<link rel="stylesheet"
+	th:href="@{webjars/bootstrap/4.2.1/css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{/css/main.css}" />
+
+</head>
+<body>
+	<form method="post" th:action="@{/upload}"
+		enctype="multipart/form-data">
+
+		<select th:field="*{course}">
+			<option th:value="'cn'" th:text="ComputerNetwork"></option>
+			<option th:value="'os'" th:text="OS"></option>
+			<option th:value="'cg'" th:text="CryptoGraphy"></option>
+
+		</select> <select th:field="*{module}">
+			<option th:value="'m1'" th:text="Module-1"></option>
+			<option th:value="'m2'" th:text="Module-2"></option>
+			<option th:value="'m3'" th:text="Module-3"></option>
+
+		</select> <select th:field="*{assigment}">
+			<option th:value="'a'" th:text="A"></option>
+			<option th:value="'b'" th:text="B"></option>
+			<option th:value="'c'" th:text="C"></option>
+
+		</select>
+		<div class="form-group">
+			<input type="file" name="file" class="form-control-file">
+		</div>
+		<button type="submit" class="btn btn-primary">Upload File</button>
+	</form>
+
+</body>
+</html>
